@@ -1,5 +1,5 @@
 ﻿namespace Lab10;
-
+using static AdditionalFunctions;
 public class Piano : MusicalInstrument
 {
     private string[] availableKeyLayouts = new string[]
@@ -50,5 +50,45 @@ public class Piano : MusicalInstrument
     {
         KeyLayout = keyLayout;
         NumberKeys = numberKeys;
+    }
+
+    public new void Show()
+    {
+        base.Show();
+        Console.WriteLine($"Количество клавиш у фортепиано - {NumberKeys}");
+        Console.WriteLine($"Раскладка клавиш - {KeyLayout}");
+    }
+
+    public override void VirtualShow()
+    {
+        base.VirtualShow();
+        Console.WriteLine($"Количество клавиш у фортепиано - {NumberKeys}");
+        Console.WriteLine($"Раскладка клавиш - {KeyLayout}");
+    }
+
+    public override void Init()
+    {
+        base.Init();
+        Console.WriteLine("Введите количество клавиш: ");
+        NumberKeys = CorrectIntegerInput();
+        Console.WriteLine("Введитье раскладку клавиш фортепиано: ");
+        KeyLayout = Console.ReadLine();
+    }
+
+    public override void RandomInit()
+    {
+        Random rand = new Random();
+        base.RandomInit();
+        NumberKeys = rand.Next(88, 103);
+        KeyLayout = availableKeyLayouts[rand.Next(0,availableKeyLayouts.Length)];
+    }
+    
+    public override bool Equals(object obj)
+    {
+        if (obj is Piano piano)
+        {
+            return Name == piano.Name && NumberKeys == piano.NumberKeys && KeyLayout == piano.KeyLayout;
+        }
+        return false;
     }
 }

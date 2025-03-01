@@ -42,5 +42,42 @@ public class ElectricGuitar : Guitar
         Name = "Электрическая гитара";
         PowerSource = powerSource;
     }
+
+    public new void Show()
+    {
+        base.Show();
+        Console.WriteLine($"Источник питания - {PowerSource}");
+    }
     
+    public override void VirtualShow()
+    {
+        base.VirtualShow();
+        Console.WriteLine($"Источник питания - {PowerSource}");
+    }
+
+    public override void Init()
+    {
+        base.Init();
+        Console.WriteLine("Введите источник питания: ");
+        PowerSource = Console.ReadLine();
+    }
+
+    public override void RandomInit()
+    {
+        base.RandomInit();
+        
+        Random rand = new Random();
+        PowerSource = availablePowerSupplies[rand.Next(0, availablePowerSupplies.Length)];
+    }
+    
+    public override bool Equals(object obj)
+    {
+        if (obj is ElectricGuitar electricGuitar)
+        {
+            return Name == electricGuitar.Name 
+                   && NumberStrings == electricGuitar.NumberStrings 
+                   && PowerSource == electricGuitar.PowerSource;
+        }
+        return false;
+    }
 }
