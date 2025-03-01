@@ -1,6 +1,6 @@
 ﻿namespace Lab10;
 
-class Guitar : MusicalInstrument
+public class Guitar : MusicalInstrument
 {
     private int numberStrings;
 
@@ -19,7 +19,6 @@ class Guitar : MusicalInstrument
     public Guitar() : base("Гитара")
     {
         NumberStrings = 4;
-        
     }
 
     public Guitar(int numberStrings) : base("Гитара")
