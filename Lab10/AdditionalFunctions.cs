@@ -17,4 +17,6 @@ public class AdditionalFunctions
         }
         return intNumber;
     }
+    
+    public static void TextSeparator() => Console.WriteLine("------------------------");
 }
