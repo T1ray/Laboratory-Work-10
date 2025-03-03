@@ -1,5 +1,5 @@
 ﻿namespace Lab10;
-using static AdditionalFunctions;
+using static AdditionalFunctions.AdditionalFunctions;
 
 class Program
 {

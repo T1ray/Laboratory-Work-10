@@ -1,4 +1,4 @@
-﻿namespace Lab10;
+﻿namespace AdditionalFunctions;
 
 public class AdditionalFunctions
 {

@@ -1,5 +1,6 @@
 ﻿namespace Lab10;
-using static AdditionalFunctions;
+using static AdditionalFunctions.AdditionalFunctions;
+
 public class Piano : MusicalInstrument
 {
     private string[] availableKeyLayouts = new string[]
