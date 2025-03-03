@@ -65,8 +65,8 @@ public class ElectricGuitar : Guitar
     public override void RandomInit()
     {
         base.RandomInit();
-        
         Random rand = new Random();
+        Name = "Электрическая гитара";
         PowerSource = availablePowerSupplies[rand.Next(0, availablePowerSupplies.Length)];
     }
     

@@ -79,6 +79,7 @@ public class Piano : MusicalInstrument
     {
         Random rand = new Random();
         base.RandomInit();
+        Name = "Фортепиано";
         NumberKeys = rand.Next(88, 103);
         KeyLayout = availableKeyLayouts[rand.Next(0,availableKeyLayouts.Length)];
     }

@@ -51,6 +51,7 @@ public class Guitar : MusicalInstrument
     {
         Random rand = new Random();
         base.RandomInit();
+        Name = "Гитара";
         NumberStrings = rand.Next(4, 13);
     }
 

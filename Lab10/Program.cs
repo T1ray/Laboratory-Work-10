@@ -1,6 +1,4 @@
-﻿using Lab10;
-
-namespace Lab10;
+﻿namespace Lab10;
 using static AdditionalFunctions;
 
 class Program
@@ -8,19 +6,96 @@ class Program
     
     static void DemonstratePartOne(MusicalInstrument[] instruments)
     {
-        // Не виртупльная функция show
+        Console.WriteLine("Пример использования не виртуальной функции Show");
         foreach (MusicalInstrument instrument in instruments)
         {
             instrument.Show();
+            Console.WriteLine();
         }
 
         TextSeparator();
         
-        // Виртуальная функция show
+        Console.WriteLine("Пример использования виртуальной функции Show");
         foreach (MusicalInstrument instrument in instruments)
         {
             instrument.VirtualShow();
+            Console.WriteLine();
         }
+    }
+
+    static void DemonstratePartTwo(MusicalInstrument[] instruments)
+    {
+        Console.WriteLine("Запрос 30: Среднее количество струн всех гитар");
+        Console.WriteLine(AverageGuitarStrings(instruments));
+        TextSeparator();
+        
+        Console.WriteLine("Запрос 31: Количество струн всех электрогитар c фиксированным источником питания");
+        Console.WriteLine(NumberStringsAllElectricGuitarsFixedPowerSupply(instruments));
+        TextSeparator();
+        
+        Console.WriteLine("Запрос 32: Максимальное количество клавиш на фортепиано с октавной раскладкой");
+        Console.WriteLine(MaxNumberOctavePianoKeys(instruments));
+    }
+    
+    static double AverageGuitarStrings(MusicalInstrument[] instruments)
+    {
+        int totalNumberStrings = 0;
+        int numberGuitars = 0;
+
+        foreach (var instrument in instruments)
+        {
+            if (instrument is Guitar guitar)
+            {
+                totalNumberStrings += guitar.NumberStrings;
+                numberGuitars++;
+            }
+        }
+        return numberGuitars > 0 ? totalNumberStrings / numberGuitars : 0;
+    }
+    
+    static int NumberStringsAllElectricGuitarsFixedPowerSupply(MusicalInstrument[] instruments)
+    {
+        int totalNumberStrings = 0;
+
+        foreach (var instrument in instruments)
+        {
+            ElectricGuitar electricGuitar = instrument as ElectricGuitar;
+            if (electricGuitar != null && electricGuitar.PowerSource == "фиксированный источник питания")
+            {
+                totalNumberStrings += electricGuitar.NumberStrings;
+            }
+        }
+        return totalNumberStrings;
+    }
+    
+    static int MaxNumberOctavePianoKeys(MusicalInstrument[] instruments)
+    {
+        int maxNumberKeys = 0;
+
+        foreach (var instrument in instruments)
+        {
+            if (instrument.GetType() == typeof(Piano))
+            {
+                Piano piano = (Piano)instrument;
+                if (piano.KeyLayout == "октавная" && piano.NumberKeys > maxNumberKeys)
+                {
+                    maxNumberKeys = piano.NumberKeys;
+                }
+            }
+        }
+        return maxNumberKeys;
+    }
+
+    static void DemonstratePartThree(MusicalInstrument[] instruments)
+    {
+        
+    }
+
+    static void Menu()
+    {
+        Console.WriteLine("1. Вывод первой части");
+        Console.WriteLine("2. Вывод второй части");
+        Console.WriteLine("3. Вывод третьей части");
     }
     static void Main(string[] args)
     {
@@ -48,6 +123,26 @@ class Program
             }
             instruments[i].RandomInit();
         }
-        DemonstratePartOne(instruments);
+
+        while (true)
+        {
+            Menu();
+            Console.Write("Выберите пункт меню: ");
+            string input = Console.ReadLine();
+            TextSeparator();
+            switch (input)
+            {
+                case "1":
+                    DemonstratePartOne(instruments);
+                    break;
+                case "2":
+                    DemonstratePartTwo(instruments);
+                    break;
+                case "3":
+                    DemonstratePartThree(instruments);
+                    break;
+            }
+            TextSeparator();
+        }
     }
 }
