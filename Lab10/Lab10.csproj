@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ClassLibraryLab10\ClassLibraryLab10.csproj" />
+      <ProjectReference Include="..\ClassLibraryLab9\ClassLibraryLab9.csproj" />
     </ItemGroup>
 
 </Project>

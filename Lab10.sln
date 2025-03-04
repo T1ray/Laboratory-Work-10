@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdditionalFunctions", "Addi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryLab9", "ClassLibraryLab9\ClassLibraryLab9.csproj", "{5AC71F84-BEE2-4916-BC26-41129785B26E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{F44D9560-9655-41E3-AE33-7F8802F580EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{5AC71F84-BEE2-4916-BC26-41129785B26E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AC71F84-BEE2-4916-BC26-41129785B26E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AC71F84-BEE2-4916-BC26-41129785B26E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F44D9560-9655-41E3-AE33-7F8802F580EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F44D9560-9655-41E3-AE33-7F8802F580EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F44D9560-9655-41E3-AE33-7F8802F580EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F44D9560-9655-41E3-AE33-7F8802F580EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

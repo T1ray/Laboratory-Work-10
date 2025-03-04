@@ -3,7 +3,10 @@ using static AdditionalFunctions.AdditionalFunctions;
 
 public class Guitar : MusicalInstrument
 {
+    private static int numberGuitars = 0; 
     private int numberStrings;
+    
+    public static int NumberGuitars {get => numberGuitars;}
 
     public int NumberStrings
     {
@@ -20,11 +23,13 @@ public class Guitar : MusicalInstrument
     public Guitar() : base("Гитара")
     {
         NumberStrings = 4;
+        numberGuitars++;
     }
 
     public Guitar(int numberStrings) : base("Гитара")
     {
         NumberStrings = numberStrings;
+        numberGuitars++;
     }
 
     public new void Show()
@@ -62,5 +67,20 @@ public class Guitar : MusicalInstrument
             return Name == guitar.Name && NumberStrings == guitar.NumberStrings;
         }
         return false;
+    }
+    
+    public override string ToString()
+    {
+        return base.ToString() + $"Количество струн: {NumberStrings}\n";
+    }
+    
+    public override object Clone()
+    {
+        return new Guitar(this.NumberStrings);
+    }
+
+    public object ShallowClone()
+    {
+        return this.MemberwiseClone();
     }
 }

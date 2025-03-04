@@ -1,5 +1,6 @@
 ﻿namespace Lab10;
 using static AdditionalFunctions.AdditionalFunctions;
+using Lab9_1;
 
 class Program
 {
@@ -50,7 +51,7 @@ class Program
                 numberGuitars++;
             }
         }
-        return numberGuitars > 0 ? totalNumberStrings / numberGuitars : 0;
+        return numberGuitars > 0 ? (double)totalNumberStrings / numberGuitars : 0;
     }
     
     static int NumberStringsAllElectricGuitarsFixedPowerSupply(MusicalInstrument[] instruments)
@@ -59,7 +60,7 @@ class Program
 
         foreach (var instrument in instruments)
         {
-            ElectricGuitar electricGuitar = instrument as ElectricGuitar;
+            ElectricGuitar? electricGuitar = instrument as ElectricGuitar;
             if (electricGuitar != null && electricGuitar.PowerSource == "фиксированный источник питания")
             {
                 totalNumberStrings += electricGuitar.NumberStrings;
@@ -86,9 +87,75 @@ class Program
         return maxNumberKeys;
     }
 
-    static void DemonstratePartThree(MusicalInstrument[] instruments)
+    static void DemonstratePartThree()
     {
+        IInit[] objects = new IInit[10];
+        Random rand = new Random();
         
+        for (int i = 0; i < objects.Length-1; i++)
+        {
+            int type = rand.Next(5);
+    
+            switch (type)
+            {
+                case 0:
+                    objects[i] = new MusicalInstrument();
+                    break;
+                case 1:
+                    objects[i] = new Guitar();
+                    break;
+                case 2:
+                    objects[i] = new ElectricGuitar();
+                    break;
+                case 3:
+                    objects[i] = new Piano();
+                    break;
+                case 4:
+                    objects[i] = new Student();
+                    break;
+            }
+            objects[i].RandomInit();
+        }
+        objects[objects.Length - 1] = new Student {Age = 19, Gpa = 8.87, Name = "Константин"};
+        Student searchTarget = (Student)objects[objects.Length - 1];
+
+        foreach (var obj in objects)
+        {
+            Console.WriteLine(obj);
+        }
+        
+        TextSeparator();
+        Console.WriteLine($"Количество объектов класса музыкальный инструмент: {MusicalInstrument.NumberMusicalInstruments}");
+        Console.WriteLine($"Количество объектов класса гитары: {Guitar.NumberGuitars}");
+        Console.WriteLine($"Количество объектов класса электрогитары: {ElectricGuitar.NumberElectricGuitars}");
+        Console.WriteLine($"Количество объектов класса фортепиано: {Piano.NumberPianos}");
+        Console.WriteLine($"Количество объектов класса студент: {Student.NumberStudents}");
+        
+        TextSeparator();
+        Array.Sort(objects);
+        foreach (var obj in objects)
+        {
+            Console.WriteLine(obj);
+        }
+        
+        TextSeparator();
+        Console.WriteLine("Сортировка по полю Name");
+        int findedIndex = Array.BinarySearch(objects, searchTarget);
+        Console.WriteLine($"Студент с именем {searchTarget.Name} найден по индексу: {findedIndex}");
+        Console.WriteLine(objects[findedIndex]);
+        
+        TextSeparator();
+        Array.Sort(objects, new NameLengthComparer());
+        foreach (var obj in objects)
+        {
+            Console.WriteLine(obj);
+        }
+        
+        TextSeparator();
+        Console.WriteLine("Сортировка по длине поля Name");
+        findedIndex = Array.BinarySearch(objects, searchTarget);
+        Console.WriteLine($"Студент с именем {searchTarget.Name} найден по индексу: {findedIndex}");
+        Console.WriteLine(objects[findedIndex]);
     }
 
     static void Menu()
@@ -139,7 +206,7 @@ class Program
                     DemonstratePartTwo(instruments);
                     break;
                 case "3":
-                    DemonstratePartThree(instruments);
+                    DemonstratePartThree();
                     break;
             }
             TextSeparator();

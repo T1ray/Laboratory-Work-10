@@ -1,7 +1,23 @@
+using Lab10;
+using static AdditionalFunctions.AdditionalFunctions;
+
 namespace Lab9_1;
 
-public class Student
+public class Student: IInit, IComparable<Student>, ICloneable
 {
+    private static string[] availableNames = new string[] {
+       "София",
+       "Ева",
+       "Анна",
+       "Мария",
+       "Виктория",
+       "Михаил",
+       "Артём ",
+       "Александр",
+       "Матвей",
+       "Максим"
+    };
+    
     // переменные
     public string Name { get; set; }
     private int age;
@@ -9,6 +25,8 @@ public class Student
     private static int numberStudents;
     
     // свойства
+    
+    public static int NumberStudents {get => numberStudents;}
     public int Age
     {
         get => age;
@@ -123,10 +141,10 @@ public class Student
             return newStudent;
     }
 
-    public static int NumberStudents()
-    {
-        return numberStudents;
-    }
+    // public static int NumberStudents()
+    // {
+    //     return numberStudents;
+    // }
 
     public override bool Equals(object obj)
     {
@@ -144,5 +162,50 @@ public class Student
                    && student1.Age == student2.Age 
                    && student1.Gpa == student2.Gpa;
         return false;
+    }
+
+    public void Init()
+    {
+        Console.WriteLine("Введите имя студента: ");
+        Name = Console.ReadLine();
+        Console.WriteLine("Введите возраст студента (больше 17): ");
+        Age = CorrectIntegerInput();
+        Console.WriteLine("Введите среднюю оценку студента (от 0 до 10): ");
+        Gpa = CorrectIntegerInput();
+    }
+    
+    public void RandomInit()
+    {
+        Random rand = new Random();
+        Name = availableNames[rand.Next(0, availableNames.Length)];
+        Age = rand.Next(18, 23);
+        Gpa = rand.NextDouble()*10;
+    }
+    
+    public override string ToString()
+    {
+        return $"Имя студента: {Name} \nВозраст:{Age} \nGpa: {Math.Round(Gpa,2)}\n";
+    }
+
+    public int CompareTo(Student? other)
+    {
+        if (other == null) return -1;
+        return Name.CompareTo(other.Name);
+    }
+    
+    public int CompareTo(IInit? other)
+    {
+        if (other == null) return -1;
+        return Name.CompareTo(other.Name);
+    }
+    
+    public object Clone()
+    {
+        return new Student(this.Name, this.Age, this.Gpa);
+    }
+
+    public object ShallowClone()
+    {
+        return this.MemberwiseClone();
     }
 }

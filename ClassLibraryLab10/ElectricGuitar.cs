@@ -2,7 +2,7 @@
 
 public class ElectricGuitar : Guitar
 {
-    private string[] availablePowerSupplies = new string[]
+    private static string[] availablePowerSupplies = new string[]
     {
         "батарейки",
         "аккумулятор",
@@ -11,6 +11,9 @@ public class ElectricGuitar : Guitar
     };
 
     private string powerSource;
+    private static int numberElectricGuitars = 0;
+    
+    public static int NumberElectricGuitars {get => numberElectricGuitars;}
     
     public string PowerSource
     {
@@ -29,12 +32,14 @@ public class ElectricGuitar : Guitar
     {
         Name = "Электрическая гитара";
         PowerSource = "Аккумулятор";
+        numberElectricGuitars++;
     }
 
     public ElectricGuitar(string powerSource) : base(6)
     {
         Name = "Электрическая гитара";
         PowerSource = powerSource;
+        numberElectricGuitars++;
     }
 
     public ElectricGuitar(string powerSource, int numberStrings) : base(numberStrings)
@@ -79,5 +84,20 @@ public class ElectricGuitar : Guitar
                    && PowerSource == electricGuitar.PowerSource;
         }
         return false;
+    }
+    
+    public override string ToString()
+    {
+        return base.ToString() + $"Источник питания: {PowerSource}\n";
+    }
+    
+    public override object Clone()
+    {
+        return new ElectricGuitar(this.PowerSource, this.NumberStrings);
+    }
+
+    public object ShallowClone()
+    {
+        return this.MemberwiseClone();
     }
 }

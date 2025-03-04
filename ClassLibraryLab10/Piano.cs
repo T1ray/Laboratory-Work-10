@@ -3,15 +3,18 @@ using static AdditionalFunctions.AdditionalFunctions;
 
 public class Piano : MusicalInstrument
 {
-    private string[] availableKeyLayouts = new string[]
+    private static string[] availableKeyLayouts = new string[]
     {
         "октавная",
         "шкальная",
         "дигитальная"
     };
-
+    
+    private static int numberPianos = 0; 
     private string keyLayout;
     private int numberKeys;
+    
+    public static int NumberPianos {get => numberPianos;}
 
     public string KeyLayout
     {
@@ -39,12 +42,14 @@ public class Piano : MusicalInstrument
     {
         KeyLayout = availableKeyLayouts[0];
         NumberKeys = 88;
+        numberPianos++;
     }
 
     public Piano(int numberKeys) : base("Фортепиано")
     {
         KeyLayout = availableKeyLayouts[0];
         NumberKeys = numberKeys;
+        numberPianos++;
     }
 
     public Piano(int numberKeys, string keyLayout) : base("Фортепиано")
@@ -92,5 +97,20 @@ public class Piano : MusicalInstrument
             return Name == piano.Name && NumberKeys == piano.NumberKeys && KeyLayout == piano.KeyLayout;
         }
         return false;
+    }
+    
+    public override string ToString()
+    {
+        return base.ToString() + $"Раскладка клавиш: {KeyLayout} \nКоличество клавиш: {NumberKeys}\n";
+    }
+    
+    public override object Clone()
+    {
+        return new ElectricGuitar(this.KeyLayout, this.NumberKeys);
+    }
+
+    public object ShallowClone()
+    {
+        return this.MemberwiseClone();
     }
 }

@@ -18,5 +18,21 @@ public class AdditionalFunctions
         return intNumber;
     }
     
+    public static double CorrectDoubleInput()
+    {
+        bool isNumber = false;
+        double doubleNumber = 0.0;
+        while (!isNumber)
+        {
+            string input = Console.ReadLine();
+            isNumber = double.TryParse(input, out doubleNumber);
+            if (!isNumber)
+            {
+                Console.WriteLine("Вы ввели не число с плавающей запятой!");
+            }
+        }
+        return doubleNumber;
+    }
+    
     public static void TextSeparator() => Console.WriteLine("------------------------");
 }
