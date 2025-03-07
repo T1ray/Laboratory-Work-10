@@ -94,7 +94,10 @@ public class Piano : MusicalInstrument
     {
         if (obj is Piano piano)
         {
-            return Name == piano.Name && NumberKeys == piano.NumberKeys && KeyLayout == piano.KeyLayout;
+            return Id.Equals(piano.Id)
+                   && Name == piano.Name 
+                   && NumberKeys == piano.NumberKeys 
+                   && KeyLayout == piano.KeyLayout;
         }
         return false;
     }
