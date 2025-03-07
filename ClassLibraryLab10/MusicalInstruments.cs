@@ -1,8 +1,9 @@
 ﻿using System;
 using Lab9_1;
+using static AdditionalFunctions.AdditionalFunctions;
 namespace Lab10;
 
-public class MusicalInstrument : IInit, IComparable<MusicalInstrument>, ICloneable
+public class MusicalInstrument : IInit, ICloneable, IComparable<MusicalInstrument>
 {
     private static int numberMusicalInstruments = 0; 
     private static string[] randomInstruments = new string[]
@@ -14,31 +15,36 @@ public class MusicalInstrument : IInit, IComparable<MusicalInstrument>, ICloneab
     public static int NumberMusicalInstruments {get => numberMusicalInstruments;}
     
     public string Name { get; set; }
+    public IdNumber Id { get; set; }
 
     public MusicalInstrument()
     {
         Name = "";
+        Id = new IdNumber();
         numberMusicalInstruments++;
     }
 
-    public MusicalInstrument(string name)
+    public MusicalInstrument(string name, int id)
     {
         Name = name;
+        Id = new IdNumber(id);
         numberMusicalInstruments++;
     }
 
     public void Show()
     {
-        Console.WriteLine($"Название инструмента - {Name}");
+        Console.WriteLine($"Id инструмента - {Id.Id}\n Название инструмента - {Name}");
     }
 
     public virtual void VirtualShow()
     {
-        Console.WriteLine($"Название инструмента - {Name}");
+        Console.WriteLine($"Id инструмента - {Id.Id}\n Название инструмента - {Name}");
     }
 
     public virtual void Init()
     {
+        Console.Write("Введите ID инструмента: ");
+        Id = new IdNumber(CorrectIntegerInput());
         Console.Write("Введите название инструмента: ");
         string input = Console.ReadLine();
         Name = input;
@@ -49,16 +55,11 @@ public class MusicalInstrument : IInit, IComparable<MusicalInstrument>, ICloneab
     {
         Random rand = new Random();
         Name = randomInstruments[rand.Next(randomInstruments.Length)];
+        Id = new IdNumber(rand.Next(1000));
         numberMusicalInstruments++;
     }
 
     public int CompareTo(MusicalInstrument? other)
-    {
-        if (other == null) return -1;
-        return Name.CompareTo(other.Name);
-    }
-    
-    public int CompareTo(IInit? other)
     {
         if (other == null) return -1;
         return Name.CompareTo(other.Name);
@@ -75,12 +76,12 @@ public class MusicalInstrument : IInit, IComparable<MusicalInstrument>, ICloneab
 
     public override string ToString()
     {
-        return $"Название инструмента: {Name}\n";
+        return $"ID инструмента: {Id.Id}, Название инструмента: {Name}\n";
     }
 
     public virtual object Clone()
     {
-        return new MusicalInstrument(this.Name);
+        return new MusicalInstrument(this.Name, this.Id.Id);
     }
 
     public object ShallowClone()

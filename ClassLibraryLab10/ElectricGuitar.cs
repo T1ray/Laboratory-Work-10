@@ -28,21 +28,21 @@ public class ElectricGuitar : Guitar
         }
     }
 
-    public ElectricGuitar() : base(6)
+    public ElectricGuitar() : base(6, 0)
     {
         Name = "Электрическая гитара";
         PowerSource = "Аккумулятор";
         numberElectricGuitars++;
     }
 
-    public ElectricGuitar(string powerSource) : base(6)
+    public ElectricGuitar(string powerSource, int id) : base(6, id)
     {
         Name = "Электрическая гитара";
         PowerSource = powerSource;
         numberElectricGuitars++;
     }
 
-    public ElectricGuitar(string powerSource, int numberStrings) : base(numberStrings)
+    public ElectricGuitar(string powerSource, int numberStrings, int id) : base(numberStrings, id)
     {
         Name = "Электрическая гитара";
         PowerSource = powerSource;
@@ -93,7 +93,7 @@ public class ElectricGuitar : Guitar
     
     public override object Clone()
     {
-        return new ElectricGuitar(this.PowerSource, this.NumberStrings);
+        return new ElectricGuitar(this.PowerSource, this.NumberStrings, this.Id.Id);
     }
 
     public object ShallowClone()

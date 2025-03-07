@@ -3,7 +3,7 @@ using static AdditionalFunctions.AdditionalFunctions;
 
 namespace Lab9_1;
 
-public class Student: IInit, IComparable<Student>, ICloneable
+public class Student: IInit, ICloneable
 {
     private static string[] availableNames = new string[] {
        "София",
@@ -20,6 +20,7 @@ public class Student: IInit, IComparable<Student>, ICloneable
     
     // переменные
     public string Name { get; set; }
+    public IdNumber Id { get; set; }
     private int age;
     private double gpa;
     private static int numberStudents;
@@ -66,8 +67,9 @@ public class Student: IInit, IComparable<Student>, ICloneable
     }
     
     // конструкторы
-    public Student(string name, int age, double gpa)
+    public Student(int id, string name, int age, double gpa)
     {
+        Id = new IdNumber(id);
         Name = name;
         Age = age;
         Gpa = gpa;
@@ -76,6 +78,7 @@ public class Student: IInit, IComparable<Student>, ICloneable
 
     public Student()
     {
+        Id = new IdNumber();
         Name = "Вася";
         Age = 18;
         Gpa = 0;
@@ -129,14 +132,14 @@ public class Student: IInit, IComparable<Student>, ICloneable
 
     public static Student operator %(Student student, string newName)
     {
-        Student newStudent = new Student(newName, student.Age, student.Gpa);
+        Student newStudent = new Student(student.Id.Id, newName, student.Age, student.Gpa);
         return newStudent;
     }
 
     public static Student operator -(Student student, double d)
     {
             Student newStudent;
-            if (student.Gpa - d > 0) newStudent = new Student(student.Name, student.Age, student.Gpa - d);
+            if (student.Gpa - d > 0) newStudent = new Student(student.Id.Id, student.Name, student.Age, student.Gpa - d);
             else throw new Exception("Gpa не может стать отрицательным");
             return newStudent;
     }
@@ -184,24 +187,12 @@ public class Student: IInit, IComparable<Student>, ICloneable
     
     public override string ToString()
     {
-        return $"Имя студента: {Name} \nВозраст:{Age} \nGpa: {Math.Round(Gpa,2)}\n";
-    }
-
-    public int CompareTo(Student? other)
-    {
-        if (other == null) return -1;
-        return Name.CompareTo(other.Name);
-    }
-    
-    public int CompareTo(IInit? other)
-    {
-        if (other == null) return -1;
-        return Name.CompareTo(other.Name);
+        return $"Id студента: {Id.Id} \nИмя студента: {Name} \nВозраст:{Age} \nGpa: {Math.Round(Gpa,2)}\n";
     }
     
     public object Clone()
     {
-        return new Student(this.Name, this.Age, this.Gpa);
+        return new Student(this.Id.Id, this.Name, this.Age, this.Gpa);
     }
 
     public object ShallowClone()

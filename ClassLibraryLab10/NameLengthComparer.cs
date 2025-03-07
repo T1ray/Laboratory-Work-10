@@ -2,10 +2,12 @@
 
 namespace Lab10;
 
-public class NameLengthComparer : IComparer<IInit>
+public class NameLengthComparer : IComparer<MusicalInstrument>
 {
-    public int Compare(IInit? x, IInit? y)
+    public int Compare(MusicalInstrument? x, MusicalInstrument? y)
     {
+        if (x == null) return -1;
+        if (y == null) return 1;
         return x.Name.Length.CompareTo(y.Name.Length);
     }
 }

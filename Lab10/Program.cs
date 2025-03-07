@@ -89,35 +89,36 @@ class Program
 
     static void DemonstratePartThree()
     {
-        IInit[] objects = new IInit[10];
+        MusicalInstrument[] objects = new MusicalInstrument[10];
         Random rand = new Random();
         
         for (int i = 0; i < objects.Length-1; i++)
         {
-            int type = rand.Next(5);
+            int type = rand.Next(4);
+            int id = rand.Next(1000);
     
             switch (type)
             {
                 case 0:
-                    objects[i] = new MusicalInstrument();
+                    objects[i] = new MusicalInstrument("", id);
                     break;
                 case 1:
-                    objects[i] = new Guitar();
+                    objects[i] = new Guitar(4, id);
                     break;
                 case 2:
-                    objects[i] = new ElectricGuitar();
+                    objects[i] = new ElectricGuitar("аккумулятор", 6, id);
                     break;
                 case 3:
-                    objects[i] = new Piano();
-                    break;
-                case 4:
-                    objects[i] = new Student();
+                    objects[i] = new Piano(88, "октавная", id);
                     break;
             }
             objects[i].RandomInit();
         }
-        objects[objects.Length - 1] = new Student {Age = 19, Gpa = 8.87, Name = "Константин"};
-        Student searchTarget = (Student)objects[objects.Length - 1];
+
+        Guitar searchTarget = new Guitar(8,555);
+        searchTarget.Name = "Лучшая гитара";
+        objects[objects.Length - 1] = new Guitar(searchTarget.NumberStrings, searchTarget.Id.Id);
+        objects[objects.Length - 1].Name = searchTarget.Name;
 
         foreach (var obj in objects)
         {
@@ -129,7 +130,6 @@ class Program
         Console.WriteLine($"Количество объектов класса гитары: {Guitar.NumberGuitars}");
         Console.WriteLine($"Количество объектов класса электрогитары: {ElectricGuitar.NumberElectricGuitars}");
         Console.WriteLine($"Количество объектов класса фортепиано: {Piano.NumberPianos}");
-        Console.WriteLine($"Количество объектов класса студент: {Student.NumberStudents}");
         
         TextSeparator();
         Array.Sort(objects);
@@ -153,9 +153,25 @@ class Program
         
         TextSeparator();
         Console.WriteLine("Сортировка по длине поля Name");
-        findedIndex = Array.BinarySearch(objects, searchTarget);
+        findedIndex = Array.BinarySearch(objects, searchTarget, new NameLengthComparer());
         Console.WriteLine($"Студент с именем {searchTarget.Name} найден по индексу: {findedIndex}");
         Console.WriteLine(objects[findedIndex]);
+        
+        TextSeparator();
+        Console.WriteLine("Демонстрация глубокого и поверхностного копирования на примере Student");
+        Student originalStudent = new Student(0, "Александр", 18, 7.17);
+        Console.WriteLine($"Исходный студент: \n{originalStudent}");
+        
+        Student shallowStudent = (Student)originalStudent.ShallowClone();
+        Student cloneStudent = (Student)shallowStudent.Clone();
+
+        Console.WriteLine("Изменение возраста");
+        originalStudent.Id.Id = 100;
+
+        Console.WriteLine($"Исходный студент: \n{originalStudent}");
+        Console.WriteLine($"Копия студента: \n{shallowStudent}");
+        Console.WriteLine($"Клон студента: \n{cloneStudent}");
+        
     }
 
     static void Menu()
@@ -172,20 +188,21 @@ class Program
         for (int i = 0; i < instruments.Length; i++)
         {
             int type = rand.Next(4);
+            int id = rand.Next(1000);
     
             switch (type)
             {
                 case 0:
-                    instruments[i] = new MusicalInstrument();
+                    instruments[i] = new MusicalInstrument("", id);
                     break;
                 case 1:
-                    instruments[i] = new Guitar();
+                    instruments[i] = new Guitar(4, id);
                     break;
                 case 2:
-                    instruments[i] = new ElectricGuitar();
+                    instruments[i] = new ElectricGuitar("аккумулятор", 6, id);
                     break;
                 case 3:
-                    instruments[i] = new Piano();
+                    instruments[i] = new Piano(88, "октавная", id);
                     break;
             }
             instruments[i].RandomInit();

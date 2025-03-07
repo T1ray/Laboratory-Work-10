@@ -38,21 +38,21 @@ public class Piano : MusicalInstrument
         }
     }
 
-    public Piano() : base("Фортепиано")
+    public Piano() : base("Фортепиано", 0)
     {
         KeyLayout = availableKeyLayouts[0];
         NumberKeys = 88;
         numberPianos++;
     }
 
-    public Piano(int numberKeys) : base("Фортепиано")
+    public Piano(int numberKeys, int id) : base("Фортепиано", id)
     {
         KeyLayout = availableKeyLayouts[0];
         NumberKeys = numberKeys;
         numberPianos++;
     }
 
-    public Piano(int numberKeys, string keyLayout) : base("Фортепиано")
+    public Piano(int numberKeys, string keyLayout, int id) : base("Фортепиано", id)
     {
         KeyLayout = keyLayout;
         NumberKeys = numberKeys;
@@ -106,7 +106,7 @@ public class Piano : MusicalInstrument
     
     public override object Clone()
     {
-        return new ElectricGuitar(this.KeyLayout, this.NumberKeys);
+        return new Piano(this.NumberKeys, this.KeyLayout, this.Id.Id);
     }
 
     public object ShallowClone()

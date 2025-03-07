@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryLab9", "ClassLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{F44D9560-9655-41E3-AE33-7F8802F580EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonClasses", "CommonClasses\CommonClasses.csproj", "{C7169918-E34C-4F44-BB4E-7C68E656C4AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProgram", "TestProgram\TestProgram.csproj", "{9E86953D-EBA6-472F-97BC-A743695056C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{F44D9560-9655-41E3-AE33-7F8802F580EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F44D9560-9655-41E3-AE33-7F8802F580EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F44D9560-9655-41E3-AE33-7F8802F580EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7169918-E34C-4F44-BB4E-7C68E656C4AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7169918-E34C-4F44-BB4E-7C68E656C4AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7169918-E34C-4F44-BB4E-7C68E656C4AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7169918-E34C-4F44-BB4E-7C68E656C4AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E86953D-EBA6-472F-97BC-A743695056C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E86953D-EBA6-472F-97BC-A743695056C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E86953D-EBA6-472F-97BC-A743695056C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E86953D-EBA6-472F-97BC-A743695056C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

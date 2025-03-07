@@ -20,13 +20,13 @@ public class Guitar : MusicalInstrument
         
     }
 
-    public Guitar() : base("Гитара")
+    public Guitar() : base("Гитара", 0)
     {
         NumberStrings = 4;
         numberGuitars++;
     }
 
-    public Guitar(int numberStrings) : base("Гитара")
+    public Guitar(int numberStrings, int id) : base("Гитара", id)
     {
         NumberStrings = numberStrings;
         numberGuitars++;
@@ -76,7 +76,7 @@ public class Guitar : MusicalInstrument
     
     public override object Clone()
     {
-        return new Guitar(this.NumberStrings);
+        return new Guitar(this.NumberStrings, this.Id.Id);
     }
 
     public object ShallowClone()
