@@ -27,7 +27,7 @@ public class TestMusicalInstrument
     [TestMethod]
     public void TestNumberMusicalInstrument()
     {
-        Assert.AreEqual(42, MusicalInstrument.NumberMusicalInstruments);
+        Assert.AreEqual(66, MusicalInstrument.NumberMusicalInstruments);
     }
     
     [TestMethod]

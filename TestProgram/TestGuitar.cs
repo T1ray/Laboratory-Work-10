@@ -22,7 +22,7 @@ public class TestGuitar
     [TestMethod]
     public void TestNumberGuitars()
     {
-        Assert.AreEqual(22, Guitar.NumberGuitars);
+        Assert.AreEqual(37, Guitar.NumberGuitars);
     }
 
     [TestMethod]

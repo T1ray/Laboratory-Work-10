@@ -23,7 +23,7 @@ public class TestPiano
     [TestMethod]
     public void TestNumberPianos()
     {
-        Assert.AreEqual(2, Piano.NumberPianos);
+        Assert.AreEqual(11, Piano.NumberPianos);
     }
 
     [TestMethod]

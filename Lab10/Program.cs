@@ -2,8 +2,37 @@
 using static AdditionalFunctions.AdditionalFunctions;
 using Lab9_1;
 
-class Program
+public class Program
 {
+    public static MusicalInstrument[] GenerateMusicalInstrumentsArray(int length)
+    {
+        MusicalInstrument[] instruments = new MusicalInstrument[length];
+        Random rand = new Random();
+        
+        for (int i = 0; i < instruments.Length; i++)
+        {
+            int type = rand.Next(4);
+            int id = rand.Next(1000);
+    
+            switch (type)
+            {
+                case 0:
+                    instruments[i] = new MusicalInstrument("", id);
+                    break;
+                case 1:
+                    instruments[i] = new Guitar(4, id);
+                    break;
+                case 2:
+                    instruments[i] = new ElectricGuitar("аккумулятор", 6, id);
+                    break;
+                case 3:
+                    instruments[i] = new Piano(88, "октавная", id);
+                    break;
+            }
+            instruments[i].RandomInit();
+        }
+        return instruments;
+    }
     
     static void DemonstratePartOne(MusicalInstrument[] instruments)
     {
@@ -38,7 +67,7 @@ class Program
         Console.WriteLine(MaxNumberOctavePianoKeys(instruments));
     }
     
-    static double AverageGuitarStrings(MusicalInstrument[] instruments)
+    public static double AverageGuitarStrings(MusicalInstrument[] instruments)
     {
         int totalNumberStrings = 0;
         int numberGuitars = 0;
@@ -54,14 +83,14 @@ class Program
         return numberGuitars > 0 ? (double)totalNumberStrings / numberGuitars : 0;
     }
     
-    static int NumberStringsAllElectricGuitarsFixedPowerSupply(MusicalInstrument[] instruments)
+    public static int NumberStringsAllElectricGuitarsFixedPowerSupply(MusicalInstrument[] instruments)
     {
         int totalNumberStrings = 0;
 
         foreach (var instrument in instruments)
         {
             ElectricGuitar? electricGuitar = instrument as ElectricGuitar;
-            if (electricGuitar != null && electricGuitar.PowerSource == "фиксированный источник питания")
+            if (electricGuitar != null && electricGuitar.PowerSource.ToLower() == "фиксированный источник питания")
             {
                 totalNumberStrings += electricGuitar.NumberStrings;
             }
@@ -69,7 +98,7 @@ class Program
         return totalNumberStrings;
     }
     
-    static int MaxNumberOctavePianoKeys(MusicalInstrument[] instruments)
+    public static int MaxNumberOctavePianoKeys(MusicalInstrument[] instruments)
     {
         int maxNumberKeys = 0;
 
@@ -89,31 +118,7 @@ class Program
 
     static void DemonstratePartThree()
     {
-        MusicalInstrument[] objects = new MusicalInstrument[10];
-        Random rand = new Random();
-        
-        for (int i = 0; i < objects.Length-1; i++)
-        {
-            int type = rand.Next(4);
-            int id = rand.Next(1000);
-    
-            switch (type)
-            {
-                case 0:
-                    objects[i] = new MusicalInstrument("", id);
-                    break;
-                case 1:
-                    objects[i] = new Guitar(4, id);
-                    break;
-                case 2:
-                    objects[i] = new ElectricGuitar("аккумулятор", 6, id);
-                    break;
-                case 3:
-                    objects[i] = new Piano(88, "октавная", id);
-                    break;
-            }
-            objects[i].RandomInit();
-        }
+        MusicalInstrument[] objects = GenerateMusicalInstrumentsArray(10);
 
         Guitar searchTarget = new Guitar(8,555);
         searchTarget.Name = "Лучшая гитара";
@@ -182,31 +187,7 @@ class Program
     }
     static void Main(string[] args)
     {
-        MusicalInstrument[] instruments = new MusicalInstrument[20];
-        Random rand = new Random();
-        
-        for (int i = 0; i < instruments.Length; i++)
-        {
-            int type = rand.Next(4);
-            int id = rand.Next(1000);
-    
-            switch (type)
-            {
-                case 0:
-                    instruments[i] = new MusicalInstrument("", id);
-                    break;
-                case 1:
-                    instruments[i] = new Guitar(4, id);
-                    break;
-                case 2:
-                    instruments[i] = new ElectricGuitar("аккумулятор", 6, id);
-                    break;
-                case 3:
-                    instruments[i] = new Piano(88, "октавная", id);
-                    break;
-            }
-            instruments[i].RandomInit();
-        }
+        MusicalInstrument[] instruments = GenerateMusicalInstrumentsArray(20);
 
         while (true)
         {
